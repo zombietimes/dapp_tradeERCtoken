@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Trade</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <main>
+    <h2>Preparation</h2>
+    <h3>Wallet</h3>
+    <textarea id='iWalletPassword' cols='60' rows='1' placeholder='password'>this is password</textarea>
+    <br>
+    <button type='button' id='iWalletReady'>Ready</button>
+    <br>
+    <p id='iWalletInfo'>Wait a minute.</p>
+    <h3>Import account : Ganache</h3>
+    <textarea id='iImportAddress' cols='60' rows='1' placeholder='address'></textarea>
+    <br>
+    <textarea id='iImportPrivateKey' cols='60' rows='3' placeholder='privateKey'></textarea>
+    <br>
+    <button type='button' id='iImportAction'>Import</button>
+    <br>
+    <br>
+    <h3>Send to wallet</h3>
+    <label>Imported account</label>
+    <br>
+    <textarea id='iAddressG' cols='60' rows='1' placeholder='0x...'></textarea>
+    <br>
+    <button type='button' id='iSendToWallet'>Send Ether to PlayerP and PlayerQ</button>
+    <br>
+    <textarea id='iAmountG' cols='60' rows='1'>1000000000000000000 Wei</textarea>
+    <br>
+    <br>
+    <label>PlayerP</label>
+    <br>
+    <textarea id='iAddressP' cols='60' rows='1' placeholder='0x...'></textarea>
+    <br>
+    <textarea id='iAmountP' cols='60' rows='1' readonly>0 Wei</textarea>
+    <br>
+    <br>
+    <label>PlayerQ</label>
+    <br>
+    <textarea id='iAddressQ' cols='60' rows='1' placeholder='0x...'></textarea>
+    <br>
+    <textarea id='iAmountQ' cols='60' rows='1' readonly>0 Wei</textarea>
+    <br>
+    <br>
+    <p id='iSendInfo'></p>
+    <br>
+
+    <hr>
+    <h2>DApp</h2>
+    <form>
+      <input type="radio" name="tAccounts" value="PlayerP" id="iZPlayerP"> PlayerP
+      <input type="radio" name="tAccounts" value="PlayerQ" id="iZPlayerQ"> PlayerQ
+    </form>
+    <h3>Asset</h3>
+    <label>Address : </label><label id="iZAddress">...</label><br>
+    <label>Wei : </label><label id="iZAmountWei">...</label><br>
+    <label>ERC20 : </label><label id="iZAmount20">...</label><br>
+    <label>ERC721-ItemC : </label><label id="iZAmount721C">...</label><br>
+    <label>ERC721-ItemD : </label><label id="iZAmount721D">...</label><br>
+    <label>ERC1155-ItemE : </label><label id="iZAmount1155E">...</label><br>
+    <label>ERC1155-ItemF : </label><label id="iZAmount1155F">...</label><br>
+    <br>
+    <button id="iCreateAssets">Create initial assets</button>
+    <br>
+    <br>
+    <label>Wei</label><br>
+    <button id="iSendToHolderWei">Deposit to Holder : 100 Wei</button>
+    <br>
+    <button id="iSendFromHolderWei">Withdraw from Holder : all Wei</button>
+    <br>
+    <br>
+    <label>ERC20</label><br>
+    <button id="iSendToHolder20">Deposit to Holder : 100 ERC20</button>
+    <br>
+    <button id="iSendFromHolder20">Withdraw from Holder : 100 ERC20</button>
+    <br>
+    <br>
+    <label>ERC721</label><br>
+    <button id="iSendToHolder721C">Deposit to Holder : ERC721-ItemC</button>
+    <br>
+    <button id="iSendToHolder721D">Deposit to Holder : ERC721-ItemD</button>
+    <br>
+    <button id="iSendFromHolder721C">Withdraw from Holder : ERC721-ItemC</button>
+    <br>
+    <button id="iSendFromHolder721D">Withdraw from Holder : ERC721-ItemD</button>
+    <br>
+    <br>
+    <label>ERC1155</label><br>
+    <button id="iSendToHolder1155E">Deposit to Holder : 100 ERC1155-ItemE</button>
+    <br>
+    <button id="iSendToHolder1155F">Deposit to Holder : 100 ERC1155-ItemF</button>
+    <br>
+    <button id="iSendFromHolder1155E">Withdraw from Holder : 100 ERC1155-ItemE</button>
+    <br>
+    <button id="iSendFromHolder1155F">Withdraw from Holder : 100 ERC1155-ItemF</button>
+    <br>
+    <p id='iDappInfo'>Select Player.</p>
+
+    <h3>Holders</h3>
+    <label>* Deposit</label><br>
+    <label>Wei : </label><label id="iHolderDepositWei">...</label><br>
+    <label>ERC20 : </label><label id="iHolderDeposit20">...</label><br>
+    <label>ERC721-ItemC : </label><label id="iHolderDeposit721C">...</label><br>
+    <label>ERC721-ItemD : </label><label id="iHolderDeposit721D">...</label><br>
+    <label>ERC1155-ItemE : </label><label id="iHolderDeposit1155E">...</label><br>
+    <label>ERC1155-ItemF : </label><label id="iHolderDeposit1155F">...</label><br>
+    <br>
+    <label>* OnOrder</label><br>
+    <label>Wei : </label><label id="iHolderOnOrderWei">...</label><br>
+    <label>ERC20 : </label><label id="iHolderOnOrder20">...</label><br>
+    <label>ERC721-ItemC : </label><label id="iHolderOnOrder721C">...</label><br>
+    <label>ERC721-ItemD : </label><label id="iHolderOnOrder721D">...</label><br>
+    <label>ERC1155-ItemE : </label><label id="iHolderOnOrder1155E">...</label><br>
+    <label>ERC1155-ItemF : </label><label id="iHolderOnOrder1155F">...</label><br>
+    <br>
+    <label>Wei</label><br>
+    <button id="iSellOrderWei">Sell order : 10 Wei</button>
+    <br>
+    <button id="iBuyOrderWei">Buy order : 10 Wei</button>
+    <br>
+    <br>
+    <label>ERC20</label><br>
+    <button id="iSellOrder20">Sell order : 10 ERC20</button>
+    <br>
+    <button id="iBuyOrder20">Buy order : 10 ERC20</button>
+    <br>
+    <br>
+    <label>ERC721</label><br>
+    <button id="iSellOrder721C">Sell order : ERC721-ItemC</button>
+    <br>
+    <button id="iBuyOrder721C">Buy order : ERC721-ItemC</button>
+    <br>
+    <button id="iSellOrder721D">Sell order : ERC721-ItemD</button>
+    <br>
+    <button id="iBuyOrder721D">Buy order : ERC721-ItemD</button>
+    <br>
+    <br>
+    <label>ERC1155</label><br>
+    <button id="iSellOrder1155E">Sell order : 10 ERC1155-ItemE</button>
+    <br>
+    <button id="iBuyOrder1155E">Buy order : 10 ERC1155-ItemE</button>
+    <br>
+    <button id="iSellOrder1155F">Sell order : 10 ERC1155-ItemF</button>
+    <br>
+    <button id="iBuyOrder1155F">Buy order : 10 ERC1155-ItemF</button>
+    <br>
+
+    <h3>Order</h3>
+    <form>
+      <label>Seller</label><br>
+      <input type="radio" name="tSellerKind" value="Wei" id="iSellerKindWei"> Wei<br>
+      <input type="radio" name="tSellerKind" value="ERC20" id="iSellerKind20"> ERC20<br>
+      <input type="radio" name="tSellerKind" value="ERC721C" id="iSellerKind721C"> ERC721-ItemC<br>
+      <input type="radio" name="tSellerKind" value="ERC721D" id="iSellerKind721D"> ERC721-ItemD<br>
+      <input type="radio" name="tSellerKind" value="ERC1155E" id="iSellerKind1155E"> ERC1155-ItemE<br>
+      <input type="radio" name="tSellerKind" value="ERC1155F" id="iSellerKind1155F"> ERC1155-ItemF<br>
+    </form>
+    <form>
+      <label>Buyer</label><br>
+      <input type="radio" name="tBuyerKind" value="Wei" id="iBuyerKindWei"> Wei<br>
+      <input type="radio" name="tBuyerKind" value="ERC20" id="iBuyerKind20"> ERC20<br>
+      <input type="radio" name="tBuyerKind" value="ERC721C" id="iBuyerKind721C"> ERC721-ItemC<br>
+      <input type="radio" name="tBuyerKind" value="ERC721D" id="iBuyerKind721D"> ERC721-ItemD<br>
+      <input type="radio" name="tBuyerKind" value="ERC1155E" id="iBuyerKind1155E"> ERC1155-ItemE<br>
+      <input type="radio" name="tBuyerKind" value="ERC1155F" id="iBuyerKind1155F"> ERC1155-ItemF<br>
+    </form>
+    <br>
+
+    <button id="iShowMarket">Show market</button>
+    <br>
+    <h4>Rate 1:1</h4>
+    <label>- Sell Order : </label>
+    <label id="iSellList0"></label>
+    <label id="iSellList1"></label>
+    <label id="iSellList2"></label>
+    <label id="iSellList3"></label>
+    <br>
+    <label>- Buy Order : </label>
+    <label id="iBuyList0"></label>
+    <label id="iBuyList1"></label>
+    <label id="iBuyList2"></label>
+    <label id="iBuyList3"></label>
+    <br>
+    <br>
+    <button id="iSell0">Sell[0]</button>
+    <button id="iSell1">Sell[1]</button>
+    <button id="iSell2">Sell[2]</button>
+    <button id="iSell3">Sell[3]</button>
+    <br><br>
+    <button id="iBuy0">Buy[0]</button>
+    <button id="iBuy1">Buy[1]</button>
+    <button id="iBuy2">Buy[2]</button>
+    <button id="iBuy3">Buy[3]</button>
+    <br><br>
+
+    <hr>
+    <button id="iDebug">Debug</button>
+    <br>
+    <p id='iDebugInfo'></p>
+    <br>
+  </main>
+  <script type="text/javascript" src="./js/abiJson_node_YourErc20.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_YourErc721.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_YourErc1155.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_Holders.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_HolderWei.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_Holder20.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_Holder721.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_Holder1155.js"></script>
+  <script type="text/javascript" src="./js/abiJson_node_Trade.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
+</body>
+</html>
